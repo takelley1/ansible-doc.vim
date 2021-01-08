@@ -47,16 +47,17 @@ CONFIGURATION                                        *ansibledoc-configuration*
 
 |g:ansibledoc_float_opts|                             *g:ansibledoc_float_opts*
     The orientation and sizing of the floating window created by
-    AnsibleDocFloat. Default value is below. >
-
+    AnsibleDocFloat. Default value is below.
+>
     let g:ansibledoc_float_opts = {
       \ 'relative': 'editor',
+      \ 'style': 'minimal',
       \ 'width': float2nr(round(0.45 * &columns)),
       \ 'height': float2nr(round(0.75 * &lines)),
       \ 'col': float2nr(round(0.27 * &columns)),
       \ 'row': float2nr(round(0.07 * &lines)),
       \ }
-
+<
 |g:ansibledoc_wrap_text|                               *g:ansibledoc_wrap_text*
     Whether to wrap the text in windows and splits created by this plugin.
     Default value is 0.

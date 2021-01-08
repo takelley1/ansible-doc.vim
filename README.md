@@ -39,6 +39,7 @@ Modify the floating window's size and position:
 ```vim
   let g:ansibledoc_float_opts = {
     \ 'relative': 'editor',
+    \ 'style': 'minimal',
     \ 'width': float2nr(round(0.45 * &columns)),
     \ 'height': float2nr(round(0.75 * &lines)),
     \ 'col': float2nr(round(0.27 * &columns)),

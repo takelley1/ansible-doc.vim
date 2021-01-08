@@ -14,6 +14,7 @@ endif
 if !exists("g:ansibledoc_float_opts")
   let g:ansibledoc_float_opts = {
     \ 'relative': 'editor',
+    \ 'style': 'minimal',
     \ 'width': float2nr(round(0.45 * &columns)),
     \ 'height': float2nr(round(0.75 * &lines)),
     \ 'col': float2nr(round(0.27 * &columns)),
@@ -41,6 +42,7 @@ function! AnsibleDoc(wintype)
     " Move cursor to middle of screen (M)
     normal! ggvG>M
   else
+    setlocal nonumber
     normal! ggM
   endif
 endfunction
@@ -50,7 +52,7 @@ command! AnsibleDocSplit call AnsibleDoc('new')
 command! AnsibleDocVSplit call AnsibleDoc('vnew')
 
 autocmd FileType ansible-doc
-  \ setlocal bufhidden=delete nonumber shiftwidth=3 scrolloff=999
+  \ setlocal bufhidden=delete shiftwidth=3 scrolloff=999
 
 if g:ansibledoc_wrap_text == 1
   autocmd FileType ansible-doc setlocal wrap
