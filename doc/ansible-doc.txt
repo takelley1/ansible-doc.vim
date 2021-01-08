@@ -5,7 +5,7 @@ Website:     https://github.com/takelley1/ansible-doc.vim
 License:     MIT
 
 ==============================================================================
-1. Introduction                                       *ansibledoc-installation*
+INTRODUCTION                                          *ansibledoc-installation*
 
 Ansible-doc.vim is a plugin that implements a simple wrapper around the
 ansible-doc shell command. Output can either be displayed in a floating window
@@ -15,7 +15,7 @@ To install, use your favorite plugin manager, such as vim-plug: >
   Plug 'takelley1/ansible-doc.vim'
 
 ==============================================================================
-2. Usage                                                     *ansibledoc-usage*
+USAGE                                                        *ansibledoc-usage*
 
 Run one of the below commands when your cursor is over the name of an
 Ansible module.
@@ -30,22 +30,22 @@ Ansible module.
     Open module documentation in a vertical split.
 
 ==============================================================================
-3. Configuration                                     *ansibledoc-configuration*
-
+CONFIGURATION                                        *ansibledoc-configuration*
 
 |g:ansibledoc_extra_mappings|                       *g:ansibledoc_extra_mappings*
     Whether to enable the below mappings in windows or splits created by
-    this plugin. Default value is 1.
+    this plugin. This is intended to give the feel of a less-style pager.
+    Default value is 1.
 
     <space>  Page-up
     b        Page-down
+
     q        Close window
     Q        Close window
     <CR>     Close window
     <Esc>    Close window
 
-
-|g:ansibledoc_float_opts|                               *g:ansibledoc_float_opts*
+|g:ansibledoc_float_opts|                             *g:ansibledoc_float_opts*
     The orientation and sizing of the floating window created by
     AnsibleDocFloat. Default value is below. >
 
@@ -60,6 +60,25 @@ Ansible module.
 |g:ansibledoc_wrap_text|                               *g:ansibledoc_wrap_text*
     Whether to wrap the text in windows and splits created by this plugin.
     Default value is 0.
+
+==============================================================================
+EXAMPLES                                                   *ansibledoc-example*
+
+Example snippet from vimrc:
+>
+    nnoremap <leader>D :AnsibleDocFloat<CR><C-L>
+    nnoremap <leader>S :AnsibleDocSplit<CR><C-L>
+    nnoremap <leader>V :AnsibleDocVSplit<CR><C-L>
+
+    let g:ansibledoc_wrap_text = 1
+
+    let g:ansibledoc_float_opts = {
+      \ 'relative': 'editor',
+      \ 'width': float2nr(round(0.45 * &columns)),
+      \ 'height': float2nr(round(0.75 * &lines)),
+      \ 'col': float2nr(round(0.27 * &columns)),
+      \ 'row': float2nr(round(0.07 * &lines)),
+      \ }
 
 ==============================================================================
 vim:tw=78:ts=4:ft=help:norl

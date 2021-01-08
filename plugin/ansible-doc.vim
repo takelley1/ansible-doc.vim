@@ -59,7 +59,7 @@ else
 endif
 
 if g:ansibledoc_extra_mappings == 1
-  " Mimic `less`-style pagination mappings.
+  " Mimic less's mappings.
   autocmd FileType ansible-doc nnoremap <buffer> <space> <C-d>
   autocmd FileType ansible-doc nnoremap <buffer> b       <C-u>
 
