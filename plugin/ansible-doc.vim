@@ -49,7 +49,6 @@ function! AnsibleDocFloat()
 endfunction
 
 function! AnsibleDocSplit(vertical)
-  setlocal splitright
   if a:vertical == 0
     execute 'new | 0read ! ansible-doc' substitute(expand("<cWORD>"), s:word_regex, "", "")
   else
