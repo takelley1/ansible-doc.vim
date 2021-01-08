@@ -80,6 +80,7 @@ if g:ansibledoc_extra_mappings == 1
   autocmd FileType ansible-doc nnoremap <buffer> Q       :close!<CR>
   autocmd FileType ansible-doc nnoremap <buffer> <CR>    :close!<CR>
   autocmd FileType ansible-doc nnoremap <buffer> <Esc>   :close!<CR>
+
   " Prevent the user from accidentally clearing the buffer.
   autocmd FileType ansible-doc nnoremap <buffer> u       <Nop>
 endif

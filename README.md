@@ -20,8 +20,8 @@ AnsibleDocSplit   # Open in a horizontal split.
 AnsibleDocVSplit  # Open in a vertical split.
 ```
 
-The following mappings are available in the floating window created by
-`AnsibleDocFloat`:
+The following mappings are available in windows and splits created by
+this plugin:
 ```
 <space>           # Page-down
 b                 # Page-up
