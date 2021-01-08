@@ -25,45 +25,36 @@ if !exists("g:ansibledoc_float_opts")
     \ }
 endif
 
-" Set other useful variables for DRY.
-let s:word_regex="[^a-zA-Z.].*"
-
 function! OpenFloatingWin()
   let opts = g:ansibledoc_float_opts
   let buf = nvim_create_buf(v:false, v:true)
   let win = nvim_open_win(buf, v:true, opts)
-  setlocal filetype=ansible-doc
 endfunction
 
-function! AnsibleDocFloat()
-  " See https://superuser.com/a/868955 for reference.
+function! AnsibleDoc(wintype)
   " Get the WORD under the cursor, then filter out unneeded characters.
-  execute 'call OpenFloatingWin() | 0read ! ansible-doc' substitute(expand("<cWORD>"), s:word_regex, "", "")
-  " Set number of lines to indent.
-  setlocal shiftwidth=3 scrolloff=999
-  " Jump to top of file (gg)
-  " Select entire file (vG)
-  " Indent (>)
-  " Move cursor to middle of screen (M)
-  normal! ggvG>M
-endfunction
-
-function! AnsibleDocSplit(vertical)
-  if a:vertical == 0
-    execute 'new | 0read ! ansible-doc' substitute(expand("<cWORD>"), s:word_regex, "", "")
-  else
-    execute 'vnew | 0read ! ansible-doc' substitute(expand("<cWORD>"), s:word_regex, "", "")
-  endif
+  " See https://superuser.com/a/868955 for reference.
+  execute a:wintype '| 0read ! ansible-doc'
+      \ substitute(expand("<cWORD>"), "[^a-zA-Z.].*", "", "")
   setlocal filetype=ansible-doc
-  " Jump to top of buffer.
-  normal! gg
+  " Format window.
+  if a:wintype == 'call OpenFloatingWin()'
+    " Jump to top of file (gg)
+    " Select entire file (vG)
+    " Indent (>)
+    " Move cursor to middle of screen (M)
+    normal! ggvG>M
+  else
+    normal! ggM
+  endif
 endfunction
 
-command! AnsibleDocFloat call AnsibleDocFloat()
-command! AnsibleDocSplit call AnsibleDocSplit(0)
-command! AnsibleDocVSplit call AnsibleDocSplit(1)
+command! AnsibleDocFloat call AnsibleDoc('call OpenFloatingWin()')
+command! AnsibleDocSplit call AnsibleDoc('new')
+command! AnsibleDocVSplit call AnsibleDoc('vnew')
 
-autocmd FileType ansible-doc setlocal bufhidden=delete nonumber
+autocmd FileType ansible-doc
+  \ setlocal bufhidden=delete nonumber shiftwidth=3 scrolloff=999
 
 if g:ansibledoc_wrap_text == 1
   autocmd FileType ansible-doc setlocal wrap
