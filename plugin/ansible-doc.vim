@@ -4,10 +4,6 @@
 " Website:     https://github.com/takelley1/ansible-doc.vim
 " License:     MIT
 
-augroup ansibledoc
-  autocmd!
-augroup END
-
 " Set default variables.
 if !exists("g:ansibledoc_extra_mappings")
   let g:ansibledoc_extra_mappings = 1
