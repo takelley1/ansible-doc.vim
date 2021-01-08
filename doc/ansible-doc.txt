@@ -13,7 +13,7 @@ or within a split.
 
 To install, use your favorite plugin manager, such as vim-plug: >
   Plug 'takelley1/ansible-doc.vim'
-
+<
 ==============================================================================
 USAGE                                                        *ansibledoc-usage*
 
@@ -80,6 +80,6 @@ Example snippet from vimrc:
       \ 'col': float2nr(round(0.27 * &columns)),
       \ 'row': float2nr(round(0.07 * &lines)),
       \ }
-
+<
 ==============================================================================
 vim:tw=78:ts=4:ft=help:norl

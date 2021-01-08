@@ -24,8 +24,8 @@ endif
 
 function! OpenFloatingWin()
   let opts = g:ansibledoc_float_opts
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
+  let float_buffer = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(float_buffer, v:true, opts)
 endfunction
 
 function! AnsibleDoc(wintype)
