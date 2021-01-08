@@ -9,17 +9,11 @@ augroup ansibledoc
 augroup END
 
 " Set default variables.
-if !exists("g:ansibledoc_map")
-  let g:ansibledoc_map = "<leader>d"
-endif
 if !exists("g:ansibledoc_extra_mappings")
   let g:ansibledoc_extra_mappings = 1
 endif
-if !exists("g:ansibledoc_floating")
-  let g:ansibledoc_floating = 1
-endif
-if !exists("g:ansibledoc_floating_opts")
-  let g:ansibledoc_floating_opts = {
+if !exists("g:ansibledoc_float_opts")
+  let g:ansibledoc_float_opts = {
     \ 'relative': 'editor',
     \ 'width': float2nr(round(0.45 * &columns)),
     \ 'height': float2nr(round(0.75 * &lines)),
@@ -31,34 +25,41 @@ endif
 " Set other useful variables for DRY.
 let s:word_regex="[^a-zA-Z.].*"
 
-
 function! OpenFloatingWin()
-  let opts = g:ansibledoc_floating_opts
+  let opts = g:ansibledoc_float_opts
   let buf = nvim_create_buf(v:false, v:true)
   let win = nvim_open_win(buf, v:true, opts)
   setlocal filetype=ansible-doc
 endfunction
 
-function! AnsibleDoc(float)
-  if a:float == 1
-    " See https://superuser.com/a/868955 for reference
-    " Get the WORD under the cursor, then filter out unneeded characters.
-    execute 'call OpenFloatingWin() | 0read ! ansible-doc'
-      \ substitute(expand("<cWORD>"), s:word_regex, "", "")
-    " Set number of lines to indent.
-    setlocal shiftwidth=3
-    " Jump to top of file (gg), Select entire file (vG), indent (>),
-    "   then move cursor to middle of screen (16j).
-    normal! ggvG>16j
-  elseif a:float == 0
-    execute 'vnew | 0read ! ansible-doc'
-      \ substitute(expand("<cWORD>"), s:word_regex, "", "")
-    setlocal filetype=ansible-doc
-    normal! gg
-  endif
+function! AnsibleDocFloat()
+  " See https://superuser.com/a/868955 for reference.
+  " Get the WORD under the cursor, then filter out unneeded characters.
+  execute 'call OpenFloatingWin() | 0read ! ansible-doc' substitute(expand("<cWORD>"), s:word_regex, "", "")
+  " Set number of lines to indent.
+  setlocal shiftwidth=3 scrolloff=999
+  " Jump to top of file (gg)
+  " Select entire file (vG)
+  " Indent (>)
+  " Move cursor to middle of screen (M)
+  normal! ggvG>M
 endfunction
 
-execute 'nnoremap ' g:ansibledoc_map ' :call AnsibleDoc('g:ansibledoc_floating')<CR>'
+function! AnsibleDocSplit(vertical)
+  setlocal splitright
+  if a:vertical == 0
+    execute 'new | 0read ! ansible-doc' substitute(expand("<cWORD>"), s:word_regex, "", "")
+  else
+    execute 'vnew | 0read ! ansible-doc' substitute(expand("<cWORD>"), s:word_regex, "", "")
+  endif
+  setlocal filetype=ansible-doc
+  " Jump to top of buffer.
+  normal! gg
+endfunction
+
+command! AnsibleDocFloat call AnsibleDocFloat()
+command! AnsibleDocSplit call AnsibleDocSplit(0)
+command! AnsibleDocVSplit call AnsibleDocSplit(1)
 
 autocmd FileType ansible-doc setlocal bufhidden=delete nonumber nowrap
 
