@@ -45,3 +45,8 @@ Modify the floating window's size and position:
     \ 'row': float2nr(round(0.07 * &lines)),
     \ }
 ```
+
+Enable text wrapping in windows created by this plugin:
+```vim
+let g:ansibledoc_wrap_text = 1
+```

@@ -12,6 +12,9 @@ augroup END
 if !exists("g:ansibledoc_extra_mappings")
   let g:ansibledoc_extra_mappings = 1
 endif
+if !exists("g:ansibledoc_wrap_text")
+  let g:ansibledoc_wrap_text = 0
+endif
 if !exists("g:ansibledoc_float_opts")
   let g:ansibledoc_float_opts = {
     \ 'relative': 'editor',
@@ -61,10 +64,16 @@ command! AnsibleDocFloat call AnsibleDocFloat()
 command! AnsibleDocSplit call AnsibleDocSplit(0)
 command! AnsibleDocVSplit call AnsibleDocSplit(1)
 
-autocmd FileType ansible-doc setlocal bufhidden=delete nonumber nowrap
+autocmd FileType ansible-doc setlocal bufhidden=delete nonumber
+
+if g:ansibledoc_wrap_text == 1
+  autocmd FileType ansible-doc setlocal wrap
+else
+  autocmd FileType ansible-doc setlocal nowrap
+endif
 
 if g:ansibledoc_extra_mappings == 1
-  " Mimick `less`-style pagination mappings.
+  " Mimic `less`-style pagination mappings.
   autocmd FileType ansible-doc nnoremap <buffer> <space> <C-d>
   autocmd FileType ansible-doc nnoremap <buffer> b       <C-u>
 

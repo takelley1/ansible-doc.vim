@@ -34,27 +34,32 @@ Ansible module.
 
 
 |g:ansibledoc_extra_mappings|                       *g:ansibledoc_extra_mappings*
-    Whether to enable the below mappings in floating windows created by
-    AnsibleDocFloat. Default value is 1.
+    Whether to enable the below mappings in windows or splits created by
+    this plugin. Default value is 1.
 
-    <space>: Page-up
-    b      : Page-down
-    q      : Close window
-    Q      : Close window
-    <CR>   : Close window
-    <Esc>  : Close window
+    <space>  Page-up
+    b        Page-down
+    q        Close window
+    Q        Close window
+    <CR>     Close window
+    <Esc>    Close window
 
 
 |g:ansibledoc_float_opts|                               *g:ansibledoc_float_opts*
     The orientation and sizing of the floating window created by
-    AnsibleDocFloat. Default value is below.
-    >
-    \ 'relative': 'editor',
-    \ 'width': float2nr(round(0.45 * &columns)),
-    \ 'height': float2nr(round(0.75 * &lines)),
-    \ 'col': float2nr(round(0.27 * &columns)),
-    \ 'row': float2nr(round(0.07 * &lines)),
-    \ }
+    AnsibleDocFloat. Default value is below. >
+
+    let g:ansibledoc_float_opts = {
+      \ 'relative': 'editor',
+      \ 'width': float2nr(round(0.45 * &columns)),
+      \ 'height': float2nr(round(0.75 * &lines)),
+      \ 'col': float2nr(round(0.27 * &columns)),
+      \ 'row': float2nr(round(0.07 * &lines)),
+      \ }
+
+|g:ansibledoc_wrap_text|                               *g:ansibledoc_wrap_text*
+    Whether to wrap the text in windows and splits created by this plugin.
+    Default value is 0.
 
 ==============================================================================
 vim:tw=78:ts=4:ft=help:norl
