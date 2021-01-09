@@ -22,45 +22,20 @@ if !exists("g:ansibledoc_float_opts")
     \ }
 endif
 
-function! OpenFloatingWin()
-  let opts = g:ansibledoc_float_opts
-  let float_buffer = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(float_buffer, v:true, opts)
-endfunction
-
-function! AnsibleDoc(wintype)
-  " Get the WORD under the cursor, then filter out unneeded characters.
-  " See https://superuser.com/a/868955 for reference.
-  execute a:wintype '| 0read ! ansible-doc'
-      \ substitute(expand("<cWORD>"), "[^a-zA-Z.].*", "", "")
-  setlocal filetype=ansible-doc
-  " Format window.
-  if a:wintype == 'call OpenFloatingWin()'
-    " Jump to top of file (gg)
-    " Select entire file (vG)
-    " Indent (>)
-    " Move cursor to middle of screen (M)
-    normal! ggvG>M
-  else
-    setlocal nonumber
-    normal! ggM
-  endif
-endfunction
-
-command! AnsibleDocFloat call AnsibleDoc('call OpenFloatingWin()')
-command! AnsibleDocSplit call AnsibleDoc('new')
-command! AnsibleDocVSplit call AnsibleDoc('vnew')
+command! AnsibleDocFloat call ansible_doc#AnsibleDoc('call s:OpenFloatingWin()')
+command! AnsibleDocSplit call ansible_doc#AnsibleDoc('new')
+command! AnsibleDocVSplit call ansible_doc#AnsibleDoc('vnew')
 
 autocmd FileType ansible-doc
-  \ setlocal bufhidden=delete shiftwidth=3 scrolloff=999
+  \ setlocal bufhidden=delete shiftwidth=3 scrolloff=999 nonumber
 
-if g:ansibledoc_wrap_text == 1
+if g:ansibledoc_wrap_text ==# 1
   autocmd FileType ansible-doc setlocal wrap
 else
   autocmd FileType ansible-doc setlocal nowrap
 endif
 
-if g:ansibledoc_extra_mappings == 1
+if g:ansibledoc_extra_mappings ==# 1
   " Mimic less's mappings.
   autocmd FileType ansible-doc nnoremap <buffer> <space> <C-d>
   autocmd FileType ansible-doc nnoremap <buffer> b       <C-u>
