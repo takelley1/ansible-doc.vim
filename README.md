@@ -15,22 +15,28 @@ Plug 'takelley1/ansible-doc.vim'
 Run one of the following commands when your cursor is over the name of an
 Ansible module:
 ```
-AnsibleDocFloat   # Open in a floating window (Neovim only).
-AnsibleDocSplit   # Open in a horizontal split.
-AnsibleDocVSplit  # Open in a vertical split.
+:AnsibleDocFloat   // Open documentation in a floating window (Neovim only),
+:AnsibleDocSplit   // ...or in a horizontal split,
+:AnsibleDocVSplit  // ...or a vertical split.
+```
+
+You can map these commands however you like, such as:
+```
+nnoremap <leader>d :AnsibleDocFloat<CR>C-L>
+nnoremap ds :AnsibleDocVSplit<CR>C-L>
 ```
 
 The following mappings are available in windows and splits created by
 this plugin:
 ```
-<space>           # Page-down
-b                 # Page-up
-q, Q, <CR>, <Esc> # Close window
+<space>              // Page-down
+b                    // Page-up
+q, Q, <CR>, or <Esc> // Close window
 ```
 
 ## Options
 
-Disable floating window mappings:
+Disable extra key mappings (e.g. \<space\>, b, q, etc.):
 ```vim
 let g:ansibledoc_extra_mappings = 0
 ```
