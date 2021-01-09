@@ -1,0 +1,8 @@
+ansible-doc.txt	ansible-doc.txt	/*ansible-doc.txt*
+ansibledoc-configuration	ansible-doc.txt	/*ansibledoc-configuration*
+ansibledoc-example	ansible-doc.txt	/*ansibledoc-example*
+ansibledoc-installation	ansible-doc.txt	/*ansibledoc-installation*
+ansibledoc-usage	ansible-doc.txt	/*ansibledoc-usage*
+g:ansibledoc_extra_mappings	ansible-doc.txt	/*g:ansibledoc_extra_mappings*
+g:ansibledoc_float_opts	ansible-doc.txt	/*g:ansibledoc_float_opts*
+g:ansibledoc_wrap_text	ansible-doc.txt	/*g:ansibledoc_wrap_text*
