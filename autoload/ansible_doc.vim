@@ -16,7 +16,6 @@ function! ansible_doc#AnsibleDoc(wintype)
   execute a:wintype '| 0read ! ansible-doc'
       \ substitute(expand("<cWORD>"), "[^a-zA-Z.].*", "", "")
   setlocal filetype=ansible-doc
-  " Format window.
   if a:wintype ==# 'call s:OpenFloatingWin()'
     " Jump to top of file (gg)
     " Select entire file (vG)
