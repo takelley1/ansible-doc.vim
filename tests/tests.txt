@@ -2,3 +2,7 @@ ansible.builtin.file:
 file:
 ansible.builtin.copy:
 copy:///
+ansible.windows.win_file
+ansible.windows.win_file:
+win_file
+win_file:@#)!(*%)(*!///
