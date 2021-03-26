@@ -14,34 +14,35 @@ Plug 'takelley1/ansible-doc.vim'
 
 Run one of the following commands when your cursor is over the name of an
 Ansible module:
-```
-:AnsibleDocFloat   // Open documentation in a floating window (Neovim only),
-:AnsibleDocSplit   // ...or in a horizontal split,
-:AnsibleDocVSplit  // ...or a vertical split.
-```
+
+| Command             | Description                                            |
+|---------------------|--------------------------------------------------------|
+| `:AnsibleDocFloat`  | Open documentation in a floating window (Neovim only), |
+| `:AnsibleDocSplit`  | ..or in a horizontal split,                            |
+| `:AnsibleDocVSplit` | ..or a vertical split.                                 |
 
 You can map these commands however you like, such as:
-```
+```vim
 nnoremap <leader>d :AnsibleDocFloat<CR>C-L>
-nnoremap ds :AnsibleDocVSplit<CR>C-L>
+nnoremap <leader>v :AnsibleDocVSplit<CR>C-L>
 ```
 
 The following mappings are available in windows and splits created by
 this plugin:
-```
-<space>              // Page-down
-b                    // Page-up
-q, Q, <CR>, or <Esc> // Close window
-```
+| Mapping                      | Description  |
+|------------------------------|--------------|
+| `<space>`                    | Page-down    |
+| `b`                          | Page-up      |
+| `q`, `Q`, `<CR>`, or `<Esc>` | Close window |
 
 ## Options
 
-Disable extra key mappings (e.g. \<space\>, b, q, etc.):
+Enable/disable extra key mappings (default is `1`):
 ```vim
-let g:ansibledoc_extra_mappings = 0
+let g:ansibledoc_extra_mappings = 1
 ```
 
-Modify the floating window's size and position:
+Modify the floating window's size and position (default is below):
 ```vim
   let g:ansibledoc_float_opts = {
     \ 'relative': 'editor',
@@ -53,7 +54,7 @@ Modify the floating window's size and position:
     \ }
 ```
 
-Enable text wrapping in windows created by this plugin:
+Enable/disable text wrapping in windows created by this plugin (default is `0`):
 ```vim
-let g:ansibledoc_wrap_text = 1
+let g:ansibledoc_wrap_text = 0
 ```
