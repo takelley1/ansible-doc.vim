@@ -14,7 +14,7 @@ function! ansible_doc#AnsibleDoc(wintype)
   " Get the WORD under the cursor, then filter out unneeded characters.
   " See https://superuser.com/a/868955 for reference.
   execute a:wintype '| 0read ! ansible-doc'
-      \ substitute(expand("<cWORD>"), "[^a-zA-Z.].*", "", "")
+      \ substitute(expand("<cWORD>"), "[^a-zA-Z._].*", "", "")
   setlocal filetype=ansible-doc
   if a:wintype ==# 'call s:OpenFloatingWin()'
     " Jump to top of file (gg)
