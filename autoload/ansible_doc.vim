@@ -11,10 +11,14 @@ function! s:OpenFloatingWin()
 endfunction
 
 function! ansible_doc#AnsibleDoc(wintype)
-  " Get the WORD under the cursor, then filter out unneeded characters.
+  " Get the WORD under the cursor, then filter out invalid characters.
   " See https://superuser.com/a/868955 for reference.
-  execute a:wintype '| 0read ! ansible-doc'
-      \ substitute(expand("<cWORD>"), "[^a-zA-Z0-9._].*", "", "")
+
+  let module = substitute(expand("<cWORD>"), "^[^a-zA-Z0-9._]*", "", "") " Strip leading characters.
+  let module = substitute(module, "[^a-zA-Z0-9._].*", "", "") " Strip trailing characters.
+
+  execute a:wintype '| 0read ! ansible-doc' module
+
   setlocal filetype=ansible-doc
   if a:wintype ==# 'call s:OpenFloatingWin()'
     " Jump to top of file (gg)
