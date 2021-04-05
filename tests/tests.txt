@@ -1,8 +1,10 @@
-ansible.builtin.file:
-file:
-ansible.builtin.copy:
+# NOTE: Use `echo substitute(expand("<cWORD>"), "[^a-zA-Z0-9._]", "", "")` to test
+
+!@#(!&(ansible.builtin.file:@!#)(b!*&
+file:Q)!#@)(*$&!
+      &##$ansible.builtin.copy:
+         #     ansible.builtin.copy:
 copy:///
-ansible.windows.win_file
-ansible.windows.win_file:
-win_file
 win_file:@#)!(*%)(*!///
+    ##########community.crypto.x509_certificate:#####!#OIu1
+#   community.crypto.x509_certificate:()#$*!kjhh
